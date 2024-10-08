@@ -2,9 +2,8 @@ name: Generate Custom Snake Animation
 
 on:
   schedule:
-    # Runs every day at midnight UTC
     - cron: "0 0 * * *"
-  workflow_dispatch: # Allows you to manually run the workflow
+  workflow_dispatch:
 
 jobs:
   generate:
@@ -17,20 +16,10 @@ jobs:
       - name: Generate Snake Animation
         uses: Platane/snk@v3
         with:
-          github_user_name: Okyumi # Replace with your GitHub username
+          github_user_name: YOUR_USERNAME
           outputs: dist/github-contribution-grid-snake.svg
           color_snake: black
-          color_dots: "#8dbdff,#64a1f4,#4b91f1,#3c7dd9" # Blue shades for heatmap dots
-
-      - name: Create Output Branch if It Does Not Exist
-        run: |
-          git fetch origin
-          if ! git rev-parse --verify origin/output; then
-            git checkout -b output
-            git push origin output
-          else
-            git checkout output
-          fi
+          color_dots: "#8dbdff,#64a1f4,#4b91f1,#3c7dd9"
 
       - name: Push Snake Animation to Output Branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
